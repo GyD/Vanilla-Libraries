@@ -44,6 +44,16 @@ class LibrariesPlugin extends Gdn_Plugin
     protected static $libraries = array();
 
     /**
+     * Call LibrariesPlugin_Startup Event in order to generate the library list
+     *
+     * @throws Exception
+     */
+    public function Gdn_Dispatcher_AppStartup_Handler()
+    {
+        $this->FireEvent('Startup');
+    }
+
+    /**
      * @param DiscussionController|Mixed $Sender
      * @param $libraryName
      * @param bool $minified
@@ -140,16 +150,6 @@ class LibrariesPlugin extends Gdn_Plugin
     private static function getCSS($libraryName, $minified)
     {
         return self::getFile($libraryName, $minified, 'css');
-    }
-
-    /**
-     * Call LibrariesPlugin_Startup Event in order to generate the library list
-     *
-     * @throws Exception
-     */
-    public function Gdn_Dispatcher_AppStartup_Handler()
-    {
-        $this->FireEvent('Startup');
     }
 
     /**
